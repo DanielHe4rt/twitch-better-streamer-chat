@@ -11,7 +11,6 @@ function createWindow() {
     width: 1200,
     height: 800,
     frame: false,
-    transparent: true,
     webPreferences: {
       nodeIntegration: true
     }
@@ -45,7 +44,7 @@ app.on("window-all-closed", function() {
     app.quit();
   }
 });
-//app.disableHardwareAcceleration();
+app.disableHardwareAcceleration(); 
 app.on("activate", function() {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
