@@ -24,7 +24,7 @@
 }
 
 .chat-row + .chat-row {
-    margin-top: 1rem; 
+    margin-top: 0.01rem; 
 }
 
 .user-info {

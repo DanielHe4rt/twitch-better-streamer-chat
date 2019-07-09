@@ -35,23 +35,18 @@ function filterIcons(msg) {
 }
 
 function message(badges, name, color, message, regex = false) {
-  document
-    .getElementById("chat")
-    .insertAdjacentHTML(
-      "beforeend",
-      `<div class="chat-row">
+  document.getElementById("chat").insertAdjacentHTML(
+    "beforeend",
+    `<div class="chat-row">
         <div class="user-info">
           ${getBadges(badges)} 
-          ${formatName(
-            name,
-            color
-          )} 
+          ${formatName(name, color)} 
         </div>
         <p class="message">
           ${message}
         </p>
       </div>`
-    );
+  );
 }
 
 function popChat() {
@@ -70,7 +65,7 @@ function popChat() {
 
 function manageChat(chatter, msg) {
   popChat();
-  getStreamInformation();
+
   let cmd = msg.split(" ");
   if (cmd) {
     switch (cmd[0]) {
@@ -141,6 +136,7 @@ function getChatters(channel) {
       console.log(error);
     });
 }
+setInterval(() => getStreamInformation(), 5000);
 
 module.exports = {
   manageChat,
