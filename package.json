@@ -1,0 +1,33 @@
+{
+  "name": "twitch-dashboard-electron",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "nodemon --watch * --exec \"electron . --debug\""
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^5.0.6"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "moment": "^2.24.0",
+    "node-twitchbot": "^2.0.5",
+    "spotify-web-api-node": "^4.0.0",
+    "streamlabs": "^1.3.4",
+    "tmi.js": "^1.4.5",
+    "twitch-api-v5": "^2.0.4",
+    "twitch-emoticons": "^2.1.0"
+  }
+}
