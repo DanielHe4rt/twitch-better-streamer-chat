@@ -1,7 +1,7 @@
 const $ = require("jquery");
 const emotes = require("./emotes.json");
 const config = require("./config.json");
-const moment = require('moment');
+const moment = require("moment");
 
 function getBadges(badges) {
   let html = "";
@@ -10,16 +10,16 @@ function getBadges(badges) {
   }
   if (badges.length !== 0) {
     for (let key in badges) {
-      html += `<img src="./images/${key}.png" width="20"> `;
+      html += `<img class="badges" src="./images/${key}.png" width="20"> `;
     }
     return html;
   }
 }
 
 function formatName(name, color) {
-  return `<strong style="color: ${
+  return `<span class="user-name" style="color: ${
     color !== "" ? color : "#1E90FF"
-  }">${name}: </strong>`;
+  }">${name}: </span>`;
 }
 function showImage(img_url) {
   return `<img src="${img_url}" width="250"></p>`;
@@ -39,7 +39,18 @@ function message(badges, name, color, message, regex = false) {
     .getElementById("chat")
     .insertAdjacentHTML(
       "beforeend",
-      `<p>${getBadges(badges)} ${formatName(name, color)} ${message}</p>`
+      `<div class="chat-row">
+        <div class="user-info">
+          ${getBadges(badges)} 
+          ${formatName(
+            name,
+            color
+          )} 
+        </div>
+        <p class="message">
+          ${message}
+        </p>
+      </div>`
     );
 }
 
@@ -87,11 +98,9 @@ function manageChat(chatter, msg) {
   }
 }
 
-
-
 const getStreamInformation = () => {
   let headers = new Headers();
-  
+
   headers.append("Client-ID", config.client_id);
   fetch(`https://api.twitch.tv/helix/streams?user_id=${config.user_id}`, {
     headers: headers
@@ -105,8 +114,9 @@ const getStreamInformation = () => {
       document.getElementById("title").innerHTML = user.title;
       document.getElementById("streamer-name").innerHTML = user.user_name;
       document.getElementById("viewers").innerHTML = user.viewer_count;
-      document.getElementById("uptime").innerHTML = duration.hours()  + "h " + duration.minutes() + " m"
-      eae = user.thumbnail_url
+      document.getElementById("uptime").innerHTML =
+        duration.hours() + "h " + duration.minutes() + " m";
+      eae = user.thumbnail_url;
     })
     .catch(error => {
       console.log(error);
