@@ -80,6 +80,16 @@
         $('[data-toggle=popover]').popover({
           html: true,
         })
+
+        $(".chat-row").dblclick(function (nsei){
+          console.log($(this))
+         
+        })
+        
+      })
+
+      $(document).on('click','.chat-row',function() {
+        $(this).hide()
       })
       
     </script>
