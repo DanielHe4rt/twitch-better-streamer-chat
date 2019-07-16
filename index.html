@@ -34,6 +34,7 @@
           <div id="commands">
             <a class="btn" href="#" id="showChatters" data-popover-content="popover-content-showChatters" title="Chat Users"   data-toggle="popover" data-placement="top" ><i class="fas fa-user-circle" ></i></a>
             <a class="btn" href="#" id="generateThumb" title="Generate Thumbnail"   data-toggle="popover" data-placement="top" ><i class="fas fa-portrait" ></i></a>
+            <a class="btn" href="#" id="deleteStyles" title="deleteStyles" ><i class="fas fa-eraser" ></i></a>
           </div>
           <form class="chat-input">
             <input type="text" id="input">
@@ -79,17 +80,21 @@
         document.querySelector('#generateThumb').dataset.content = document.getElementById('popover-content-generateThumb').innerHTML
         $('[data-toggle=popover]').popover({
           html: true,
-        })
+        });
 
         $(".chat-row").dblclick(function (nsei){
           console.log($(this))
-         
-        })
-        
-      })
+        });
+
+        // why are we usings ids? AND JQUERY??????
+        $("#deleteStyles").click(() => {
+            $('#chat').find('style').remove();
+        });
+
+      });
 
       $(document).on('click','.chat-row',function() {
-        $(this).hide()
+        $(this).remove()
       })
       
     </script>
