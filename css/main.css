@@ -19,12 +19,27 @@
 }
 
 .chat-row {
+  position: relative;
   display: flex;
   align-items: flex-start;
 }
 
 .chat-row + .chat-row {
     margin-top: 0.01rem; 
+}
+
+.chat-row #actions > div {
+  position: absolute;
+  right: 0;
+}
+
+.chat-row #actions div > button {
+  flex: 1;
+  background-color: transparent;
+  color: #dad8de;
+  border: none;
+  border: 1px solid #392e5c;
+  resize: none;
 }
 
 .user-info {
@@ -102,8 +117,7 @@
   display: flex;
   flex-direction: column;
 }
-.chat-wrapper .stream-info {
-}
+
 .chat-wrapper .stream-chat {
   display: flex;
   flex: 1;

@@ -17,8 +17,9 @@ function getBadges(badges) {
 }
 
 function formatName(name, color) {
+  console.log(color)
   return `<span class="user-name" style="color: ${
-    color !== "" ? color : "#1E90FF"
+    color !== null ? color : "#fed12d"
   }">${name}: </span>`;
 }
 function showImage(img_url) {
@@ -35,30 +36,15 @@ function filterIcons(msg) {
 }
 
 function message(badges, name, color, message, regex = false) {
-  
-  // if(regex){
-  //   let reg = /(<([^>]+)>)/g;
-  //   if(message.search(reg) != -1){
-  //     document.getElementById("chat").insertAdjacentHTML(
-  //       "beforeend",
-  //       `<div class="chat-row">
-  //           <div class="user-info">
-  //             ${getBadges(badges)} 
-  //             ${formatName(name, color)} 
-  //           </div>
-  //           <p class="message">
-  //             Eu sou bobão e tentei injetar alguma coisa no chat
-  //           </p>
-  //         </div>`
-  //     );
-  //     return false;
-  //   }
-  // }
-  
-
   document.getElementById("chat").insertAdjacentHTML(
     "beforeend",
     `<div class="chat-row">
+        <div id="actions" style="display:none;">
+          <div>
+            <button type="button" >A</button>
+            <button type="button" >&times;</button>
+          </div>
+        </div>
         <div class="user-info">
           ${getBadges(badges)} 
           ${formatName(name, color)} 

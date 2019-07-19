@@ -3,7 +3,7 @@
 // All of the Node.js APIs are available in this process.
 const { remote } = require("electron");
 const config = require("./config.json");
-const { manageChat, message, getChatters} = require("./utils.js");
+const { manageChat, message, getChatters } = require("./utils.js");
 const tmi = require("tmi.js");
 const opts = {
   identity: {
@@ -15,10 +15,10 @@ const opts = {
 
 // Create a client with our options
 const client = new tmi.client(opts);
-console.log(client);
+message(null, "He4rtBot", null, "Chat iniciado");
 
 client.on("message", (channel, userstate, message, self) => {
-    getChatters('danielhe4rt')
+  getChatters("danielhe4rt");
   // Don't listen to my own messages..
   if (self) return;
   console.log(userstate);
