@@ -36,24 +36,24 @@ function filterIcons(msg) {
 
 function message(badges, name, color, message, regex = false) {
   
-  if(regex){
-    let reg = /(<([^>]+)>)/g;
-    if(message.search(reg) != -1){
-      document.getElementById("chat").insertAdjacentHTML(
-        "beforeend",
-        `<div class="chat-row">
-            <div class="user-info">
-              ${getBadges(badges)} 
-              ${formatName(name, color)} 
-            </div>
-            <p class="message">
-              Eu sou bobão e tentei injetar alguma coisa no chat
-            </p>
-          </div>`
-      );
-      return false;
-    }
-  }
+  // if(regex){
+  //   let reg = /(<([^>]+)>)/g;
+  //   if(message.search(reg) != -1){
+  //     document.getElementById("chat").insertAdjacentHTML(
+  //       "beforeend",
+  //       `<div class="chat-row">
+  //           <div class="user-info">
+  //             ${getBadges(badges)} 
+  //             ${formatName(name, color)} 
+  //           </div>
+  //           <p class="message">
+  //             Eu sou bobão e tentei injetar alguma coisa no chat
+  //           </p>
+  //         </div>`
+  //     );
+  //     return false;
+  //   }
+  // }
   
 
   document.getElementById("chat").insertAdjacentHTML(
@@ -96,7 +96,7 @@ function manageChat(chatter, msg) {
           chatter.username,
           chatter.color,
           showImage(cmd[1]),
-          true
+          false
         );
         break;
 
@@ -106,7 +106,7 @@ function manageChat(chatter, msg) {
           chatter.username,
           chatter.color,
           filterIcons(msg),
-          false
+          true
         );
         break;
     }
