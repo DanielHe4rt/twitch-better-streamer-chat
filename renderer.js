@@ -16,19 +16,20 @@ const opts = {
 // Create a client with our options
 const client = new tmi.client(opts);
 message(null, "He4rtBot", null, "Chat iniciado");
+message(null, "He4rtBot", null, '<a href="#" style="color: #EB007D">Topa Link Rosa?</a>');
 
 client.on("message", (channel, userstate, message, self) => {
   getChatters("danielhe4rt");
   // Don't listen to my own messages..
   if (self) return;
-  console.log(userstate);
+  //console.log(userstate);
   // Handle different message types..
   switch (userstate["message-type"]) {
     case "action":
-      console.log("action: ", message);
+      manageChat(userstate, message,regex);
       break;
     case "chat":
-      manageChat(userstate, message);
+      manageChat(userstate, message,regex);
       break;
     default:
       // Something else ?

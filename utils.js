@@ -17,7 +17,7 @@ function getBadges(badges) {
 }
 
 function formatName(name, color) {
-  console.log(color)
+  
   return `<span class="user-name" style="color: ${
     color !== null ? color : "#fed12d"
   }">${name}: </span>`;
@@ -32,17 +32,24 @@ function filterIcons(msg) {
       msg = msg.replace(item.regex, "<img src='" + item.image_url + "'>");
     }
   });
+  console.log(msg)
   return msg;
 }
 
 function message(badges, name, color, message, regex = false) {
+  if(!message.includes('<img')){
+    if(regex){
+      message = message.replace(/<([a-z][a-z0-9]*)[^>]*?(\/?)>/g,'')
+    }
+  }
+  
   document.getElementById("chat").insertAdjacentHTML(
     "beforeend",
     `<div class="chat-row">
         <div id="actions" style="display:none;">
           <div>
-            <button type="button" >A</button>
-            <button type="button" >&times;</button>
+            <button type="button" ><i class="fas fa-eraser erase-style" ></i></button>
+            <button type="button" class="delete" >&times;</button>
           </div>
         </div>
         <div class="user-info">
@@ -57,20 +64,13 @@ function message(badges, name, color, message, regex = false) {
 }
 
 function popChat() {
-  if ($("#chat p").length >= 30) {
-    $("#chat p")[0].remove();
+  if ($("#chat-row").length >= 50) {
+    $("#chat-row")[0].remove();
   }
 }
-// function clearChat() {
-//   let chats = document.querySelectorAll("#chat p");
-//   if (chats.length != 0) {
-//     chats.forEach(chat => {
-//       chat.remove();
-//     });
-//   }
-// }
 
-function manageChat(chatter, msg) {
+
+function manageChat(chatter, msg,regex = false) {
   popChat();
 
   let cmd = msg.split(" ");
@@ -92,7 +92,7 @@ function manageChat(chatter, msg) {
           chatter.username,
           chatter.color,
           filterIcons(msg),
-          true
+          regex
         );
         break;
     }
@@ -110,7 +110,7 @@ const getStreamInformation = () => {
   })
     .then(res => res.json())
     .then(res => {
-      console.log(res);
+      
       const user = res.data[0];
       const uptime = moment().diff(moment(user.started_at));
       var duration = moment.duration(uptime);
@@ -121,9 +121,7 @@ const getStreamInformation = () => {
         duration.hours() + "h " + duration.minutes() + " m";
       eae = user.thumbnail_url;
     })
-    .catch(error => {
-      console.log(error);
-    });
+    .catch(error => {});
 };
 
 function getChatters(channel) {
@@ -140,9 +138,7 @@ function getChatters(channel) {
       });
       document.querySelector("#showChatters").dataset.content = ul.outerHTML;
     })
-    .catch(error => {
-      console.log(error);
-    });
+    .catch(error => {});
 }
 setInterval(() => getStreamInformation(), 5000);
 
