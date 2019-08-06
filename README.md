@@ -10,6 +10,9 @@
 	<img src="https://discordapp.com/api/guilds/452926217558163456/embed.png" alt="Discord server"/></a><br>
 </h3>
 
+![image](https://user-images.githubusercontent.com/40467826/62578766-5c8f6b00-b878-11e9-856e-6aa3c05fa189.png)
+
+
 ## :rocket: 5 minutes quick start
 
 :bulb: Install all packages of the `package.json` on your project. This will download everything you need.
