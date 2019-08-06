@@ -4,7 +4,7 @@
 // All of the Node.js APIs are available in this process.
 const { remote } = require('electron');
 const tmi = require('tmi.js');
-const config = require('./config.json');
+const config = require('../config.json');
 const { manageChat, message, getChatters } = require('./utils.js');
 
 const opts = {

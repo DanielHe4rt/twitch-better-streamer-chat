@@ -1,7 +1,7 @@
 const $ = require('jquery');
 const moment = require('moment');
-const emotes = require('./emotes.json');
-const config = require('./config.json');
+const emotes = require('./assets/emotes.json');
+const config = require('../config.json');
 
 const getBadges = (badges) => {
   let html = '';

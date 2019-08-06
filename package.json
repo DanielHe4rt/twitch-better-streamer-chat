@@ -4,7 +4,7 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron src/main.js",
     "dev": "nodemon --watch */** --exec \"electron . --debug\""
   },
   "repository": "https://github.com/electron/electron-quick-start",
