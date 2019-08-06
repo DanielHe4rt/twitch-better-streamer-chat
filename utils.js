@@ -1,50 +1,48 @@
-const $ = require("jquery");
-const emotes = require("./emotes.json");
-const config = require("./config.json");
-const moment = require("moment");
+const $ = require('jquery');
+const moment = require('moment');
+const emotes = require('./emotes.json');
+const config = require('./config.json');
 
-function getBadges(badges) {
-  let html = "";
-  if (!badges) {
-    return "";
-  }
+const getBadges = (badges) => {
+  let html = '';
+  if (!badges) return '';
+
   if (badges.length !== 0) {
-    for (let key in badges) {
-      html += `<img class="badges" src="./images/${key}.png" width="20"> `;
+    for (const key in badges) {
+      if (Object.prototype.hasOwnProperty.call(badges, key)) {
+        html += `<img class="badges" src="./images/${key}.png" width="20"> `;
+      }
     }
     return html;
   }
-}
 
-function formatName(name, color) {
-  
-  return `<span class="user-name" style="color: ${
-    color !== null ? color : "#fed12d"
-  }">${name}: </span>`;
-}
-function showImage(img_url) {
-  return `<img src="${img_url}" width="250"></p>`;
-}
+  return null;
+};
 
-function filterIcons(msg) {
-  emotes.forEach(function(item, index) {
-    while (msg.search(item.regex) >= 0) {
-      msg = msg.replace(item.regex, "<img src='" + item.image_url + "'>");
+const formatName = (name, color) => `<span class="user-name" style="color: ${color !== null ? color : '#fed12d'}">${name}: </span>`;
+
+const showImage = imgUrl => `<img src="${imgUrl}" width="250"></p>`;
+
+const filterIcons = (msg) => {
+  let parsedMsg = msg;
+  emotes.forEach((item) => {
+    while (parsedMsg.search(item.regex) >= 0) {
+      parsedMsg = parsedMsg.replace(item.regex, `<img src='${item.image_url}'>`);
     }
   });
-  console.log(msg)
-  return msg;
-}
+  return parsedMsg;
+};
 
-function message(badges, name, color, message, regex = false) {
-  if(!message.includes('<img')){
-    if(regex){
-      message = message.replace(/<([a-z][a-z0-9]*)[^>]*?(\/?)>/g,'')
+const message = (badges, name, color, chatMessage, regex = false) => {
+  let msg = chatMessage;
+  if (!msg.includes('<img')) {
+    if (regex) {
+      msg = msg.replace(/<([a-z][a-z0-9]*)[^>]*?(\/?)>/g, '');
     }
   }
-  
-  document.getElementById("chat").insertAdjacentHTML(
-    "beforeend",
+
+  document.getElementById('chat').insertAdjacentHTML(
+    'beforeend',
     `<div class="chat-row">
         <div id="actions" style="display:none;">
           <div>
@@ -53,98 +51,97 @@ function message(badges, name, color, message, regex = false) {
           </div>
         </div>
         <div class="user-info">
-          ${getBadges(badges)} 
-          ${formatName(name, color)} 
+          ${getBadges(badges)}
+          ${formatName(name, color)}
         </div>
         <p class="message">
-          ${message}
+          ${msg}
         </p>
-      </div>`
+      </div>`,
   );
-}
-
-function popChat() {
-  if ($("#chat-row").length >= 50) {
-    $("#chat-row")[0].remove();
-  }
-}
-
-
-function manageChat(chatter, msg,regex = false) {
-  popChat();
-
-  let cmd = msg.split(" ");
-  if (cmd) {
-    switch (cmd[0]) {
-      case "!image":
-        message(
-          chatter.badges,
-          chatter.username,
-          chatter.color,
-          showImage(cmd[1]),
-          false
-        );
-        break;
-
-      default:
-        message(
-          chatter.badges,
-          chatter.username,
-          chatter.color,
-          filterIcons(msg),
-          regex
-        );
-        break;
-    }
-
-    $("#chat").animate({ scrollTop: $("#chat").prop("scrollHeight") }, 1);
-  }
-}
-
-const getStreamInformation = () => {
-  let headers = new Headers();
-
-  headers.append("Client-ID", config.client_id);
-  fetch(`https://api.twitch.tv/helix/streams?user_id=${config.user_id}`, {
-    headers: headers
-  })
-    .then(res => res.json())
-    .then(res => {
-      
-      const user = res.data[0];
-      const uptime = moment().diff(moment(user.started_at));
-      var duration = moment.duration(uptime);
-      document.getElementById("title").innerHTML = user.title;
-      document.getElementById("streamer-name").innerHTML = user.user_name;
-      document.getElementById("viewers").innerHTML = user.viewer_count;
-      document.getElementById("uptime").innerHTML =
-        duration.hours() + "h " + duration.minutes() + " m";
-      eae = user.thumbnail_url;
-    })
-    .catch(error => {});
 };
 
-function getChatters(channel) {
+const popChat = () => {
+  if ($('#chat-row').length >= 50) {
+    $('#chat-row')[0].remove();
+  }
+};
+
+
+const manageChat = (chatter, msg, regex = false) => {
+  popChat();
+
+  const cmd = msg.split(' ');
+  if (cmd) {
+    switch (cmd[0]) {
+    case '!image':
+      message(
+        chatter.badges,
+        chatter.username,
+        chatter.color,
+        showImage(cmd[1]),
+        false,
+      );
+      break;
+
+    default:
+      message(
+        chatter.badges,
+        chatter.username,
+        chatter.color,
+        filterIcons(msg),
+        regex,
+      );
+      break;
+    }
+
+    $('#chat').animate({ scrollTop: $('#chat').prop('scrollHeight') }, 1);
+  }
+};
+
+const getStreamInformation = () => {
+  const headers = new Headers();
+
+  headers.append('Client-ID', config.client_id);
+
+  fetch(`https://api.twitch.tv/helix/streams?user_id=${config.user_id}`, {
+    headers,
+  })
+    .then(res => res.json())
+    .then((res) => {
+      const user = res.data[0];
+      const uptime = moment().diff(moment(user.started_at));
+      const duration = moment.duration(uptime);
+      $('#title').innerHTML = user.title;
+      $('#streamer-name').innerHTML = user.user_name;
+      $('#viewers').innerHTML = user.viewer_count;
+      $('#uptime').innerHTML = `${duration.hours()}h ${duration.minutes()} m`;
+    })
+    .catch(error => console.log(error));
+};
+
+const getChatters = (channel) => {
   fetch(`http://tmi.twitch.tv/group/user/${channel}/chatters`)
     .then(res => res.json())
-    .then(res => {
-      const ul = document.createElement("ul");
-      Object.keys(res.chatters).map((val, i) => {
-        res.chatters[val].map(user => {
-          let li = document.createElement("li");
+    .then((res) => {
+      const ul = document.createElement('ul');
+      Object.keys(res.chatters).forEach((val) => {
+        res.chatters[val].forEach((user) => {
+          const li = document.createElement('li');
           li.appendChild(document.createTextNode(user));
           ul.appendChild(li);
         });
       });
-      document.querySelector("#showChatters").dataset.content = ul.outerHTML;
+      document.querySelector('#showChatters').dataset.content = ul.outerHTML;
     })
-    .catch(error => {});
-}
+    .catch(error => console.log(error));
+};
+
 setInterval(() => getStreamInformation(), 5000);
 
 module.exports = {
   manageChat,
   getStreamInformation,
   getChatters,
-  message
+  message,
 };
