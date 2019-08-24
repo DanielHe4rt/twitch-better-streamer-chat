@@ -1,6 +1,7 @@
 {
-    "token": "",
-    "user_id": "",
+    "token": "xxxxxxx",
+    "user_id": "xxxxxxx",
     "client_id": "danielhe4rt",
-    "channels": ["#danielhe4rt"]
+    "channels": ["#danielhe4rt"],
+    "botName": "He4rtBot"
 }

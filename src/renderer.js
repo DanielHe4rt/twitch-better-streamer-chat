@@ -22,7 +22,7 @@ const opts = {
 
 // Create a client with our options
 const client = new tmi.Client(opts);
-message(null, config.client_id, null, 'Chat iniciado');
+message(null, config.botName, null, 'Chat iniciado');
 
 client.on('message', (channel, userstate, chatMessage, self) => {
   getChatters('danielhe4rt');
