@@ -109,13 +109,14 @@ const getStreamInformation = () => {
   })
     .then(res => res.json())
     .then((res) => {
+      console.log(res)
       const user = res.data[0];
       const uptime = moment().diff(moment(user.started_at));
       const duration = moment.duration(uptime);
-      $('#title').innerHTML = user.title;
-      $('#streamer-name').innerHTML = user.user_name;
-      $('#viewers').innerHTML = user.viewer_count;
-      $('#uptime').innerHTML = `${duration.hours()}h ${duration.minutes()} m`;
+      $('#title').html(user.title);
+      $('#streamer-name').html( user.user_name);
+      $('#viewers').html(user.viewer_count)
+      $('#uptime').html(`${duration.hours()}h ${duration.minutes()} m`);
     })
     .catch(error => console.log(error));
 };
