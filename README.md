@@ -6,6 +6,7 @@
   <img src="https://heartdevs.com/wp-content/uploads/2018/12/logo.png" width="215">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Electron_Software_Framework_Logo.svg/1200px-Electron_Software_Framework_Logo.svg.png" width="215"><br>
     Twitch dashboard made in electron.<br>
+  <br>
 	<a href="https://discord.gg/J78z3FV" target="_blank">
 	<img src="https://discordapp.com/api/guilds/452926217558163456/embed.png" alt="Discord server"/></a><br>
 </h3>
