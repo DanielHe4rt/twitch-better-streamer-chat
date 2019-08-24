@@ -25,7 +25,7 @@
 }
 
 .chat-row + .chat-row {
-    margin-top: 0.01rem; 
+  margin-top: 0.01rem;
 }
 
 .chat-row #actions > div {
@@ -196,4 +196,8 @@
 }
 .popover .popover-body ul {
   padding-left: 1em;
+}
+
+#button-send {
+  cursor: pointer;
 }

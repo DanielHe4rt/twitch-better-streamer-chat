@@ -67,7 +67,6 @@ const popChat = () => {
   }
 };
 
-
 const manageChat = (chatter, msg, regex = false) => {
   popChat();
 
@@ -75,23 +74,11 @@ const manageChat = (chatter, msg, regex = false) => {
   if (cmd) {
     switch (cmd[0]) {
     case '!image':
-      message(
-        chatter.badges,
-        chatter.username,
-        chatter.color,
-        showImage(cmd[1]),
-        false,
-      );
+      message(chatter.badges, chatter.username, chatter.color, showImage(cmd[1]), false);
       break;
 
     default:
-      message(
-        chatter.badges,
-        chatter.username,
-        chatter.color,
-        filterIcons(msg),
-        regex,
-      );
+      message(chatter.badges, chatter.username, chatter.color, filterIcons(msg), regex);
       break;
     }
 
