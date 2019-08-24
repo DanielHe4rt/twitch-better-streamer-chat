@@ -4,6 +4,7 @@
 // All of the Node.js APIs are available in this process.
 const { remote } = require('electron');
 const tmi = require('tmi.js');
+const $ = require('jquery');
 const config = require('../config.json');
 const { manageChat, message, getChatters } = require('./utils.js');
 
@@ -21,7 +22,7 @@ const opts = {
 
 // Create a client with our options
 const client = new tmi.Client(opts);
-message(null, 'He4rtBot', null, 'Chat iniciado');
+message(null, config.client_id, null, 'Chat iniciado');
 
 client.on('message', (channel, userstate, chatMessage, self) => {
   getChatters('danielhe4rt');
@@ -56,6 +57,16 @@ document.getElementById('maximize').addEventListener('click', () => {
   remote.BrowserWindow.getFocusedWindow().maximize();
 });
 
-// $("#button-send").on("click", function() {
-//   $("form").submit();
-// });
+$('#button-send').click(() => {
+  const textInput = $('#input');
+  if (textInput.val() < 1) return;
+
+  // define message
+  const msg = textInput.val();
+  // render message
+  message(null, config.client_id, null, msg);
+  // send message
+  client.say(opts.channels[0], msg);
+  // clear input
+  $('#input').val('');
+});
