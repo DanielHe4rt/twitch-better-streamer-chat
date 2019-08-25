@@ -64,7 +64,7 @@ $('#button-send').click(() => {
   // define message
   const msg = textInput.val();
   // render message
-  message(null, config.client_id, null, msg);
+  message(null, config.channels[0], null, msg);
   // send message
   client.say(opts.channels[0], msg);
   // clear input
