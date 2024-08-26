@@ -3,7 +3,6 @@
 </h1>
 
 <h3 align="center">
-  <img src="https://heartdevs.com/wp-content/uploads/2018/12/logo.png" width="215">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Electron_Software_Framework_Logo.svg/1200px-Electron_Software_Framework_Logo.svg.png" width="215"><br>
     Twitch dashboard made in electron.<br>
   <br>
